@@ -1,0 +1,13 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/web ./cmd/web"
+entrypoint = "./tmp/web"
+include_ext = ["go", "templ", "tmpl", "html", "css", "js"]
+exclude_dir = ["tmp", "bin", "vendor"]
+delay = 200
+
+[log]
+time = true
+
