@@ -1,0 +1,36 @@
+:root {
+  --dark: darkgreen;
+  --light: whitesmoke;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: var(--light);
+
+  height: 100vh;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+header, footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+header {
+  border-block-end: 3px solid var(--dark);
+}
+
+footer {
+  border-block-start: 3px solid var(--dark);
+}
