@@ -11,7 +11,7 @@ Go + React app that helps you accomplish your goals by:
 - ```git clone https://github.com/billgathen/empower```
 - ```cd empower```
 - ```make dev```
-- In your browser, open http://localhost
+- In your browser, open http://localhost:3000
 
 ## To develop locally
 
