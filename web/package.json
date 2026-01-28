@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:watch": "vite build --watch"
+    "dev": "concurrently -k -s first \"npm:build:watch\" \"npm:go:dev\" \"wait-on -t 30000 http://127.0.0.1:3000 && PW_TEST_WATCH_POLL=1 npm run test:e2e\"",
+    "build:watch": "vite build --watch",
+    "go:dev": "make -C .. dev",
+    "test:e2e": "playwright test --ui"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",
@@ -13,6 +16,7 @@
     "vite": "^7.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.0",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3"
   }

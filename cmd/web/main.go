@@ -15,6 +15,9 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}).Methods("HEAD")
 
 	staticDir := http.Dir("web/static")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(staticDir)))
