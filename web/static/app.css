@@ -1,6 +1,7 @@
 :root {
   --dark: darkgreen;
-  --light: whitesmoke;
+  --light: antiquewhite;
+  --workspace: white;
 }
 
 *, *::before, *::after {
@@ -20,17 +21,79 @@ body {
   grid-template-rows: max-content 1fr max-content;
 }
 
-header, footer {
+body>header, body>footer {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--light);
 }
 
-header {
+body>header {
   border-block-end: 3px solid var(--dark);
 }
 
-footer {
+body>footer {
   border-block-start: 3px solid var(--dark);
+}
+
+header {
+  padding-block-end: 1rem;
+}
+
+#app {
+  height: 100%;
+  background-color: var(--workspace);
+  display: grid;
+  grid-template-columns: 30% 0.25rem 1fr;
+  height: 100%;
+
+  &>* {
+    height: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  &>.divider {
+    padding: 0;
+    background: var(--dark);
+    /* border-inline: 6px solid var(--workspace); */
+    /* cursor: col-resize; */
+  }
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.items {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+@media(max-width: 800px) {
+  h1, h2, h3 {
+    text-align: center;
+  }
+
+  header, footer {
+    padding: 0.25rem;
+  }
+
+  #app {
+    grid-template-columns: none;
+    grid-template-rows: 100px 18px 1fr;
+
+    &>* {
+      height: auto;
+      padding: 0.25rem;
+    }
+
+    /* &>.divider {
+      border-inline: none;
+      border-block: 6px solid var(--workspace);
+      cursor: row-resize;
+    } */
+  }
 }
