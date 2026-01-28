@@ -21,6 +21,10 @@ body {
   grid-template-rows: max-content 1fr max-content;
 }
 
+h1, h2, h3 {
+  text-align: center;
+}
+
 body>header, body>footer {
   display: flex;
   justify-content: space-around;
@@ -29,15 +33,17 @@ body>header, body>footer {
 }
 
 body>header {
-  border-block-end: 3px solid var(--dark);
+  border-block-end: 0.25rem solid var(--dark);
 }
 
 body>footer {
-  border-block-start: 3px solid var(--dark);
+  border-block-start: 0.25rem solid var(--dark);
 }
 
-header {
-  padding-block-end: 1rem;
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #app {
@@ -55,24 +61,22 @@ header {
   &>.divider {
     padding: 0;
     background: var(--dark);
-    /* border-inline: 6px solid var(--workspace); */
+    /* border-inline: 0.5rem solid var(--workspace); */
     /* cursor: col-resize; */
   }
 }
 
-.header-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.items {
+.goals {
   display: flex;
   gap: 1rem;
   flex-direction: column;
 }
 
-@media(max-width: 800px) {
+#new-goal input {
+  size: 40;
+}
+
+@media(max-width: 50rem) {
   h1, h2, h3 {
     text-align: center;
   }
@@ -85,7 +89,7 @@ header {
     grid-template-columns: none;
     grid-template-rows: max-content 0.25rem 1fr;
 
-    .items {
+    .goals {
       padding-block-end: 0.5rem;
     }
 
@@ -96,7 +100,7 @@ header {
 
     /* &>.divider {
       border-inline: none;
-      border-block: 6px solid var(--workspace);
+      border-block: 0.5rem solid var(--workspace);
       cursor: row-resize;
     } */
   }

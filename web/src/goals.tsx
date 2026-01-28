@@ -11,18 +11,42 @@ const defaultGoals = [
 ]
 
 export default function Goals() {
-  const [items, setItems] = useState<GoalData[]>(defaultGoals);
+  const [goals, setGoals] = useState<GoalData[]>(defaultGoals);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const addNewGoal = (name: string) => setGoals([{ label: name }, ...goals])
+
   return <section className="goals">
-    <header className="header-controls">
-      <h2>Goals</h2>
-      <button aria-label="Add goal">Add</button>
-    </header>
-    <div className="items">
-      {items.map((data, idx) => <Goal data={data} idx={idx} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></Goal>)}
+    <h2>Goals</h2>
+    <NewGoal addNewGoal={addNewGoal}></NewGoal>
+    <div className="goals">
+      {goals.map((data, idx) => <Goal data={data} idx={idx} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></Goal>)}
     </div>
-  </section>;
+  </section >;
+}
+
+function NewGoal({ addNewGoal }) {
+  const [newGoalName, setNewGoalName] = useState("");
+  const handleSubmit = (form: HTMLFormElement) => {
+    if (form.checkValidity()) {
+      addGoal();
+    } else {
+      form.reportValidity();
+    }
+  };
+  const addGoal = () => {
+    addNewGoal(newGoalName);
+    setNewGoalName("");
+  }
+  return <div id="new-goal">
+    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e.target) }}>
+      <label>
+        New Goal<br />
+        <input type="text" size={25} required value={newGoalName} onChange={(e) => setNewGoalName(e.target.value)} />
+      </label>&nbsp;
+      <button type="submit" aria-label="Add Goal">Add</button>
+    </form>
+  </div >
 }
 
 function Goal({ data, idx, selectedIndex, setSelectedIndex }) {
