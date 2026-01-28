@@ -83,7 +83,11 @@ header {
 
   #app {
     grid-template-columns: none;
-    grid-template-rows: 100px 18px 1fr;
+    grid-template-rows: max-content 0.25rem 1fr;
+
+    .items {
+      padding-block-end: 0.5rem;
+    }
 
     &>* {
       height: auto;
