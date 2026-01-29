@@ -6,10 +6,12 @@ const URL = `http://${HOST}:${PORT}`
 
 export default defineConfig({
   testDir: "./e2e",
+  timeout: 5_000,
 
   use: {
     baseURL: URL,
     trace: "on-first-retry",
+    actionTimeout: 5_000,
   },
 
   projects: [
