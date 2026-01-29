@@ -1,21 +1,58 @@
 import { test, expect } from "@playwright/test";
 
-test("add new goal and see it moved into the list", async ({ page }) => {
+const goalText = "lose weight";
+const labelName = "New Goal";
+const buttonName = "Add";
+
+test("with pointing device", async ({ page }) => {
   await page.goto("/");
 
-  const goalText = "lose weight";
-
-  const input = page.getByLabel("New Goal");
+  // fill out goal
+  const input = page.getByLabel(labelName);
   await input.fill(goalText);
 
-  await page.getByRole('button', { name: "Add" }).click();
+  // submit
+  await page.getByRole('button', { name: buttonName }).click();
 
+  // check list
   const items = page.locator('.goals');
 
   const radioWithLabel = items.getByRole('radio', { name: goalText });
 
   await expect(radioWithLabel).toBeVisible();
 
+  // check input is cleared
   await expect(input).toBeEmpty();
 });
 
+test("with keyboard + screen reader", async ({ page }) => {
+  await page.goto("/");
+
+  // fill out goal, ignoring tabbable elements above
+  const input = page.getByLabel(labelName);
+  await expect(input).toHaveAccessibleName(labelName);
+  await input.focus();
+
+  await page.keyboard.type(goalText);
+
+  // submit
+  await page.keyboard.press("Tab");
+
+  const addButton = page.getByRole("button", { name: buttonName });
+  await expect(addButton).toBeFocused();
+
+  await page.keyboard.press("Enter");
+
+  // check list
+  const items = page.locator(".goals");
+  const radioWithLabel = items.getByRole("radio", { name: goalText });
+
+  await page.keyboard.press("Tab");
+
+  await expect(radioWithLabel).toBeVisible();
+  await expect(radioWithLabel).toBeFocused();
+  await expect(radioWithLabel).toHaveAccessibleName(goalText);
+
+  // check input is cleared
+  await expect(input).toBeEmpty();
+});
