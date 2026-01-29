@@ -25,6 +25,13 @@ h1, h2, h3 {
   text-align: center;
 }
 
+h3 {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--light);
+  border: 1px solid var(--dark);
+}
+
 body>header, body>footer {
   display: flex;
   justify-content: space-around;
@@ -44,6 +51,13 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-block: 1rem;
 }
 
 #app {

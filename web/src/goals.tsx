@@ -1,26 +1,26 @@
 import { useState } from "react";
+import { Goal } from "./types";
 
-type GoalData = {
-  label?: string
-}
+export default function Goals({ config }) {
 
-const defaultGoals = [
-  { label: "Research" },
-  { label: "Plan" },
-  { label: "Implement" }
-]
-
-export default function Goals() {
-  const [goals, setGoals] = useState<GoalData[]>(defaultGoals);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const addNewGoal = (name: string) => setGoals([{ label: name }, ...goals])
+  const addNewGoal = (name: string) => {
+    const newGoal: Goal = { label: name, actions: [] }
+    config.setGoals([newGoal, ...config.goals]);
+    config.setSelectedGoal(newGoal);
+  }
 
   return <section className="goals">
     <h2>Goals</h2>
     <NewGoal addNewGoal={addNewGoal}></NewGoal>
     <div className="goals">
-      {goals.map((data, idx) => <Goal data={data} idx={idx} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></Goal>)}
+      {config.goals.map((goal: Goal, idx: number) => {
+        return <Goal
+          goal={goal}
+          key={idx}
+          selectedGoal={config.selectedGoal}
+          setSelectedGoal={config.setSelectedGoal}
+        ></Goal>
+      })}
     </div>
   </section >;
 }
@@ -49,14 +49,20 @@ function NewGoal({ addNewGoal }) {
   </div >
 }
 
-function Goal({ data, idx, selectedIndex, setSelectedIndex }) {
-  return <label key={idx}>
+function Goal({ goal, selectedGoal, setSelectedGoal }) {
+  const change = () => {
+    if (goal !== selectedGoal) {
+      setSelectedGoal(goal)
+    }
+  }
+
+  return <label>
     <input
       type="radio"
       name="goal"
-      checked={selectedIndex === idx}
-      onChange={() => setSelectedIndex(idx)}
+      checked={goal === selectedGoal}
+      onChange={change}
     />
-    {data.label}
+    {goal.label}
   </label>;
 } 
