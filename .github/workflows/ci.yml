@@ -27,7 +27,7 @@ jobs:
 
       - name: Build React
         working-directory: web
-        run: npm build
+        run: npm run build
 
       # --- Go ---
       - uses: actions/setup-go@v5
