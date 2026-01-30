@@ -29,7 +29,6 @@ h3 {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: var(--light);
-  border: 1px solid var(--dark);
 }
 
 body>header, body>footer {
@@ -40,11 +39,11 @@ body>header, body>footer {
 }
 
 body>header {
-  border-block-end: 0.25rem solid var(--dark);
+  border-block-end: 1px solid var(--dark);
 }
 
 body>footer {
-  border-block-start: 0.25rem solid var(--dark);
+  border-block-start: 1px solid var(--dark);
 }
 
 section {
@@ -74,7 +73,8 @@ section {
 
   &>.divider {
     padding: 0;
-    background: var(--dark);
+    width: 1px;
+    background-color: var(--dark);
     /* border-inline: 0.5rem solid var(--workspace); */
     /* cursor: col-resize; */
   }
@@ -112,10 +112,12 @@ section {
       padding: 0.25rem;
     }
 
-    /* &>.divider {
-      border-inline: none;
+    &>.divider {
+      width: auto;
+      height: 1px;
+    /*  border-inline: none;
       border-block: 0.5rem solid var(--workspace);
-      cursor: row-resize;
-    } */
+      cursor: row-resize; */
+    }
   }
 }
