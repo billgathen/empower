@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    name: Setup and Build
+  e2e:
+    name: Playwright E2E
     runs-on: ubuntu-latest
 
     steps:
@@ -38,12 +38,7 @@ jobs:
       - name: Build Go
         run: make build
 
-  e2e:
-    name: Playwright E2E
-    runs-on: ubuntu-latest
-    needs: [build]
-
-    steps:
+      # --- Playwright ---
       - name: Install Playwright browsers
         working-directory: web
         run: npx playwright install --with-deps
