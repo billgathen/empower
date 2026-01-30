@@ -45,7 +45,7 @@ jobs:
 
       - name: Start Go server
         run: |
-          ./bin/server &
+          make run &
           echo $! > server.pid
 
       - name: Wait for server
