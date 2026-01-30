@@ -1,4 +1,7 @@
-# Empower
+# Empower · CI
+[![CI](https://github.com/billgathen/empower/actions/workflows/ci.yml/badge.svg?branch=main)](
+  https://github.com/billgathen/empower/actions/workflows/ci.yml
+)
 
 Go + React app that helps you accomplish your goals by:
 - Organizing them and keeping your highest priorities in sight
