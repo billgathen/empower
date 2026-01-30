@@ -4,9 +4,8 @@ import { Goal } from "./types";
 export default function Goals({ config }) {
 
   const addNewGoal = (name: string) => {
-    const newGoal: Goal = { label: name, actions: [] }
-    config.setGoals([newGoal, ...config.goals]);
-    config.setSelectedGoal(newGoal);
+    config.addGoal(name);
+    config.selectGoal(0);
   }
 
   return <section className="goals">
@@ -16,9 +15,10 @@ export default function Goals({ config }) {
       {config.goals.map((goal: Goal, idx: number) => {
         return <Goal
           goal={goal}
+          idx={idx}
           key={idx}
-          selectedGoal={config.selectedGoal}
-          setSelectedGoal={config.setSelectedGoal}
+          selectedGoalIndex={config.selectedGoalIndex}
+          selectGoal={config.selectGoal}
         ></Goal>
       })}
     </div>
@@ -49,10 +49,11 @@ function NewGoal({ addNewGoal }) {
   </div >
 }
 
-function Goal({ goal, selectedGoal, setSelectedGoal }) {
+function Goal({ goal, idx, selectedGoalIndex, selectGoal }) {
+  const isSelected = idx === selectedGoalIndex
   const change = () => {
-    if (goal !== selectedGoal) {
-      setSelectedGoal(goal)
+    if (!isSelected) {
+      selectGoal(idx)
     }
   }
 
@@ -60,7 +61,7 @@ function Goal({ goal, selectedGoal, setSelectedGoal }) {
     <input
       type="radio"
       name="goal"
-      checked={goal === selectedGoal}
+      checked={isSelected}
       onChange={change}
     />
     {goal.label}

@@ -1,0 +1,50 @@
+import { ConfigState, ConfigAction, Goal } from "./types"
+
+export function configReducer(
+  state: ConfigState,
+  action: ConfigAction
+): ConfigState {
+  switch (action.type) {
+    case "add-goal":
+      const newGoal = { label: action.label, actions: [] } as Goal;
+      return {
+        ...state,
+        goals: [newGoal, ...state.goals]
+      };
+
+    case "select-goal":
+      return {
+        ...state,
+        selectedGoalIndex: action.index,
+      };
+
+    case "update-action":
+      return {
+        ...state,
+        goals: state.goals.map((goal, gi) =>
+          gi !== action.goalIndex
+            ? goal
+            : {
+              ...goal,
+              actions: goal.actions.map((a, ai) =>
+                ai !== action.actionIndex
+                  ? a
+                  : {
+                    ...a,
+                    ...(action.label !== undefined && {
+                      label: action.label,
+                    }),
+                    ...(action.details !== undefined && {
+                      details: action.details,
+                    }),
+                  }
+              ),
+            }
+        ),
+      };
+
+    default:
+      return state;
+  }
+}
+
