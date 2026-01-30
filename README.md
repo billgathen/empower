@@ -1,5 +1,4 @@
-# Empower · CI
-[![CI](https://github.com/billgathen/empower/actions/workflows/ci.yml/badge.svg?branch=main)](
+# Empower [![CI](https://github.com/billgathen/empower/actions/workflows/ci.yml/badge.svg?branch=main)](
   https://github.com/billgathen/empower/actions/workflows/ci.yml
 )
 
