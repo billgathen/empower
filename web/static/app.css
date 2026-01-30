@@ -80,17 +80,28 @@ section {
   }
 }
 
+section#goals,
+#goals-list,
+section#actions,
+#actions-list {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
 .goals {
   display: flex;
   gap: 1rem;
   flex-direction: column;
 }
 
-#new-goal input {
-  size: 40;
+.add-item {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  gap: 0.25rem;
 }
 
-@media(max-width: 50rem) {
+@media(max-width: 1000px) {
   h1, h2, h3 {
     text-align: center;
   }
@@ -119,5 +130,12 @@ section {
       border-block: 0.5rem solid var(--workspace);
       cursor: row-resize; */
     }
+  }
+}
+
+@media(min-width: 1200px) {
+  main {
+    width: 1200px;
+    margin-inline: auto;
   }
 }

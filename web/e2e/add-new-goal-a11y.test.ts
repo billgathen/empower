@@ -7,8 +7,10 @@ const buttonName = "Add";
 test("with keyboard + screen reader", async ({ page }) => {
   await page.goto("/");
 
+  const goals = page.locator('section#goals');
+
   // fill out goal, ignoring tabbable elements above
-  const input = page.getByLabel(labelName);
+  const input = goals.getByLabel(labelName);
   await expect(input).toHaveAccessibleName(labelName);
   await input.focus();
 
@@ -17,13 +19,13 @@ test("with keyboard + screen reader", async ({ page }) => {
   // submit
   await page.keyboard.press("Tab");
 
-  const addButton = page.getByRole("button", { name: buttonName });
+  const addButton = goals.getByRole("button", { name: buttonName });
   await expect(addButton).toBeFocused();
 
   await page.keyboard.press("Enter");
 
   // check list
-  const items = page.locator(".goals");
+  const items = page.locator("#goals-list");
   const radioWithLabel = items.getByRole("radio", { name: goalText });
 
   await page.keyboard.press("Tab");

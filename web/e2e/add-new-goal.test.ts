@@ -7,15 +7,17 @@ const buttonName = "Add";
 test("with pointing device", async ({ page }) => {
   await page.goto("/");
 
+  const goals = page.locator('section#goals');
+
   // fill out goal
-  const input = page.getByLabel(labelName);
+  const input = goals.getByLabel(labelName);
   await input.fill(goalText);
 
   // submit
-  await page.getByRole('button', { name: buttonName }).click();
+  await goals.getByRole('button', { name: buttonName }).click();
 
   // check list
-  const items = page.locator('.goals');
+  const items = goals.locator('#goals-list');
 
   const radioWithLabel = items.getByRole('radio', { name: goalText });
 

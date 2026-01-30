@@ -8,10 +8,10 @@ export default function Goals({ config }) {
     config.selectGoal(0);
   }
 
-  return <section className="goals">
+  return <section id="goals">
     <h2>Goals</h2>
     <NewGoal addNewGoal={addNewGoal}></NewGoal>
-    <div className="goals">
+    <div id="goals-list">
       {config.goals.map((goal: Goal, idx: number) => {
         return <Goal
           goal={goal}
@@ -40,11 +40,11 @@ function NewGoal({ addNewGoal }) {
   }
   return <div id="new-goal">
     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e.target) }}>
-      <label>
-        New Goal<br />
-        <input type="text" size={25} required value={newGoalName} onChange={(e) => setNewGoalName(e.target.value)} />
-      </label>&nbsp;
-      <button type="submit" aria-label="Add Goal">Add</button>
+      <label htmlFor="add-goal-input">New Goal</label>
+      <div className="add-item">
+        <input type="text" id="add-goal-input" size={24} required value={newGoalName} onChange={(e) => setNewGoalName(e.target.value)} />
+        <button type="submit" aria-label="Add Goal">Add</button>
+      </div>
     </form>
   </div >
 }

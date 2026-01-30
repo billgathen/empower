@@ -11,7 +11,7 @@ export type Goal = {
 export type ConfigAction =
   | { type: "select-goal"; index: number }
   | { type: "add-goal"; label: string }
-  | { type: "rename-goal"; index: number; label: string }
+  | { type: "add-action"; goalIndex: number; label: string }
   | {
     type: "update-action";
     goalIndex: number;

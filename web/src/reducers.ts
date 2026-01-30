@@ -18,6 +18,19 @@ export function configReducer(
         selectedGoalIndex: action.index,
       };
 
+    case "add-action":
+      return {
+        ...state,
+        goals: state.goals.map((goal, gi) =>
+          gi !== action.goalIndex
+            ? goal
+            : {
+              ...goal,
+              actions: [{ label: action.label, details: "" }, ...goal.actions],
+            }
+        ),
+      };
+
     case "update-action":
       return {
         ...state,

@@ -15,6 +15,7 @@ export function useConfig() {
     selectedGoalIndex: state.selectedGoalIndex,
     selectGoal: (index: number) => dispatch({ type: "select-goal", index }),
     addGoal: (label: string) => dispatch({ type: "add-goal", label }),
+    addAction: (goalIndex: number, label: string) => dispatch({ type: "add-action", goalIndex, label }),
     updateAction: (
       goalIndex: number,
       actionIndex: number,
