@@ -1,6 +1,8 @@
 package main
 
 import (
+	"embed"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -10,21 +12,32 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Embed assets
+//
+//go:embed static
+var staticFS embed.FS
+
 func main() {
 	_ = godotenv.Load()
 
 	addr := env("ADDR", ":3000")
+	staticDir, err := fs.Sub(staticFS, "static")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", index).Methods("GET")
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	}).Methods("HEAD")
 
 	r.HandleFunc("/api/suggest", api.Suggest).Methods("POST")
 
-	staticDir := http.Dir("web/static")
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(staticDir)))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(staticDir))))
+
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		index(w, staticDir)
+	}).Methods("GET")
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}).Methods("HEAD")
 
 	log.Printf("listening on %s", addr)
 	if err := http.ListenAndServe(addr, r); err != nil {
@@ -32,9 +45,15 @@ func main() {
 	}
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, staticDir fs.FS) {
+	b, err := fs.ReadFile(staticDir, "index.html")
+	if err != nil {
+		http.Error(w, "index not found", http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Cache-Control", "no-cache")
-	http.ServeFile(w, r, "web/static/index.html")
+	w.Write(b)
 }
 
 func env(key, fallback string) string {

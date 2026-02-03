@@ -5,12 +5,12 @@ import path from "node:path";
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: path.resolve(__dirname, "static"),
+    outDir: path.resolve(__dirname, "../cmd/web/static"),
     emptyOutDir: false,
     sourcemap: true,
     manifest: false,
     rollupOptions: {
-      input: path.resolve(__dirname, "/src/main.tsx"),
+      input: path.resolve(__dirname, "src/main.tsx"),
       output: {
         entryFileNames: "app.js",
         chunkFileNames: "chunks/[name].js",
