@@ -33,7 +33,9 @@ h3 {
 
 body>header, body>footer {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem;
   background-color: var(--light);
 }

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     role="img"
+     aria-label="Rising sun">
+
+  <!-- Mask defining the safe area (8px inset on all sides) -->
+  <defs>
+    <mask id="safe-area-mask">
+      <!-- black = hidden, white = visible -->
+      <rect width="64" height="64" fill="black"/>
+      <rect x="8" y="8" width="48" height="42" fill="white"/>
+    </mask>
+  </defs>
+
+  <!-- Sun + rays, masked to the safe area -->
+  <g mask="url(#safe-area-mask)"
+     fill="#F9B702"
+     stroke="#FFBD09"
+     stroke-linecap="round"
+     stroke-width="6">
+
+    <!-- Rays -->
+    <line x1="12" y1="40" x2="2" y2="32"  />
+    <line x1="11" y1="17" x2="20" y2="32" />
+    <line x1="32" y1="29" x2="32" y2="11" />
+    <line x1="53" y1="17" x2="44" y2="32" />
+    <line x1="52" y1="40" x2="62" y2="32" />
+
+    <!-- Early sunrise: only top half of the sun -->
+    <path d="M19 52 A12 12 0 0 1 45 52 Z"/>
+  </g>
+</svg>
