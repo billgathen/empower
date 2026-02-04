@@ -8,10 +8,18 @@ export type Goal = {
   actions: Action[]
 }
 
+export type AssistantRequest = {
+  type: string
+  requestText: string
+}
+
+export type AssistantResponse = string;
+
 export type ConfigAction =
   | { type: "select-goal"; index: number }
   | { type: "add-goal"; label: string }
   | { type: "add-action"; goalIndex: number; label: string }
+  | { type: "set-assistant-response"; assistantResponse: AssistantResponse }
   | {
     type: "update-action";
     goalIndex: number;
@@ -22,5 +30,7 @@ export type ConfigAction =
 
 export type ConfigState = {
   goals: Goal[],
-  selectedGoalIndex: number;
+  selectedGoalIndex: number,
+  assistantRequest: AssistantRequest,
+  assistantResponse: AssistantResponse,
 }

@@ -1,11 +1,21 @@
 import { test, expect } from "@playwright/test";
+import mockAssistant from "./mock-assistant";
 
 const goalText = "lose weight";
 const labelName = "New Goal";
 const buttonName = "Add";
+const assistantResponse = "This is the assistant's response";
 
 test("with keyboard + screen reader", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
+
   await page.goto("/");
+
+  const assistant = page.locator('section#assistant')
+  await expect(assistant).toHaveAttribute("aria-live", "polite")
+  await expect(assistant).toHaveAttribute("aria-atomic", "true")
+  const assistantText = page.locator("#assistant-text")
+  await expect(assistantText).toBeEmpty()
 
   const goals = page.locator('section#goals');
 
@@ -36,4 +46,7 @@ test("with keyboard + screen reader", async ({ page }) => {
 
   // check input is cleared
   await expect(input).toBeEmpty();
+
+  // confirm response returned from assistant
+  await expect(assistantText).toContainText(assistantResponse)
 });

@@ -1,6 +1,7 @@
 import { useConfig } from "./useConfig";
 import Actions from "./actions";
 import Goals from "./goals";
+import Assistant from "./assistant";
 
 /* TODO Make sections resizable using Resizer component */
 export default function App() {
@@ -10,7 +11,10 @@ export default function App() {
     <>
       <Goals config={config}></Goals>
       <div className="divider"></div>
-      <Actions config={config}></Actions>
+      <div className="stack">
+        <Actions config={config}></Actions>
+        <Assistant config={config}></Assistant>
+      </div>
     </>
   );
 }

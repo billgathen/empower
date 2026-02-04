@@ -1,10 +1,14 @@
 import { test, expect } from "@playwright/test";
+import mockAssistant from "./mock-assistant";
 
 const goalText = "lose weight";
 const labelName = "New Goal";
 const buttonName = "Add";
+const assistantResponse = "This is the assistant's response";
 
 test("with pointing device", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
+
   await page.goto("/");
 
   const goals = page.locator('section#goals');
@@ -25,4 +29,8 @@ test("with pointing device", async ({ page }) => {
 
   // check input is cleared
   await expect(input).toBeEmpty();
+
+  // confirm response returned from assistant
+  const assistantText = page.locator('#assistant-text')
+  await expect(assistantText).toContainText(assistantResponse)
 });

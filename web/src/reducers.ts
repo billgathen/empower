@@ -9,7 +9,8 @@ export function configReducer(
       const newGoal = { label: action.label, actions: [] } as Goal;
       return {
         ...state,
-        goals: [newGoal, ...state.goals]
+        goals: [newGoal, ...state.goals],
+        assistantRequest: { type: 'goal', requestText: newGoal.label }
       };
 
     case "select-goal":
@@ -54,6 +55,12 @@ export function configReducer(
               ),
             }
         ),
+      };
+
+    case "set-assistant-response":
+      return {
+        ...state,
+        assistantResponse: action.assistantResponse
       };
 
     default:

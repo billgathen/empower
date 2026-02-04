@@ -103,6 +103,12 @@ section#actions,
   gap: 0.25rem;
 }
 
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 @media(max-width: 1000px) {
   h1, h2, h3 {
     text-align: center;

@@ -5,10 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"strings"
 
-	"github.com/billgathen/empower/internal/app/ai"
+	"github.com/billgathen/empower/internal/assistant"
 	"github.com/billgathen/empower/internal/types"
 )
 
@@ -37,16 +38,21 @@ func Suggest(w http.ResponseWriter, r *http.Request) {
 		prompt := "You are an expert life coach specializing in goals that get results. " +
 			"Suggest improvements to this goal if it is not specific, time-boxed, and actionable. " +
 			"Include examples if possible. " +
-			"Keep your response under 200 words and only use plain-text: no markdown. " +
+			"Keep your response under 200 words. " +
 			"The goal is: " + req.UserInput
 
-		suggestion, err = ai.Call(r.Context(), prompt)
+		suggestion, err = assistant.Call(r.Context(), prompt)
 	default:
 		writeJSON(w, 400, types.ErrorResponse{Error: "invalid type supplied"})
 		return
 	}
 
 	if err != nil {
+		log.Println(err)
+		if errors.Is(err, context.Canceled) {
+			writeJSON(w, 401, types.ErrorResponse{Error: "request canceled"})
+			return
+		}
 		if errors.Is(err, context.Canceled) {
 			writeJSON(w, 499, types.ErrorResponse{Error: "request canceled"})
 			return
@@ -55,7 +61,8 @@ func Suggest(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, http.StatusGatewayTimeout, types.ErrorResponse{Error: "upstream timeout"})
 			return
 		}
-		writeJSON(w, http.StatusBadGateway, types.ErrorResponse{Error: "failed to generate suggestion"})
+
+		writeJSON(w, http.StatusInternalServerError, types.ErrorResponse{Error: "failed to generate suggestion"})
 		return
 	}
 
