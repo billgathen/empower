@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/billgathen/empower/internal/api"
+	"github.com/billgathen/empower/internal/middleware"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -27,6 +28,7 @@ func main() {
 	}
 
 	r := mux.NewRouter()
+	r.Use(middleware.Logger)
 
 	r.HandleFunc("/api/suggest", api.Suggest).Methods("POST")
 
@@ -38,6 +40,10 @@ func main() {
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	}).Methods("HEAD")
+	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	}).Methods("GET")
 
 	log.Printf("listening on %s", addr)
 	if err := http.ListenAndServe(addr, r); err != nil {
