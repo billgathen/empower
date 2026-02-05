@@ -23,7 +23,7 @@ export default function Assistant({ config }) {
 }
 
 export async function getSuggestion(config: ConfigState): Promise<string> {
-  const rsp = await fetch('http://localhost:3000/api/suggest', {
+  const rsp = await fetch('/api/suggest', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
