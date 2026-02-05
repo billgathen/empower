@@ -14,11 +14,16 @@ export default function Assistant({ config }) {
     aria-relevant="additions text"
     aria-labelledby="assistant-heading"
   >
-    <h2 id="assistant-heading">Assistant Suggestions</h2>
-    <div id="assistant-text"
-      dangerouslySetInnerHTML={{ __html: config.assistantResponse }}
-    >
-    </div>
+    {config.assistantRequest.type === "" ?
+      <>
+        <h2 id="assistant-heading">Assistant Suggestions</h2>
+        <div id="assistant-text"
+          dangerouslySetInnerHTML={{ __html: config.assistantResponse }}
+        >
+        </div>
+      </> :
+      <div className="sr-only">Asking assistant for suggestions...</div>
+    }
   </section>
 }
 

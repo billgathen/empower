@@ -85,6 +85,37 @@ section {
   }
 }
 
+.loading {
+  --loading-size: clamp(2rem, 20vw, 10rem);
+
+  & path {
+    stroke: black;
+  }
+
+  /* hidden by default */
+  height: 0;
+
+  margin-left: calc(100% / 2 - (var(--loading-size) / 2));
+  background-color: var(--light);
+  border-radius: 1rem;
+
+  &.visible {
+    height: var(--loading-size);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 section#goals,
 #goals-list,
 section#actions,

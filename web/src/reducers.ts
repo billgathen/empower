@@ -61,6 +61,7 @@ export function configReducer(
     case "set-assistant-response":
       return {
         ...state,
+        selectedGoalIndex: 0,
         assistantRequest: EmptyAssistantRequest,
         assistantResponse: action.assistantResponse
       };
