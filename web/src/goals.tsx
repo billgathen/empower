@@ -8,8 +8,8 @@ export default function Goals({ config }) {
     config.selectGoal(0);
   }
 
-  return <section id="goals">
-    <h2>Goals</h2>
+  return <section id="goals" aria-labelledby="goals-heading">
+    <h2 id="goals-heading">Goals</h2>
     <NewGoal addNewGoal={addNewGoal}></NewGoal>
     <div id="goals-list">
       {config.goals.map((goal: Goal, idx: number) => {

@@ -12,8 +12,9 @@ export default function Assistant({ config }) {
     aria-live="polite"
     aria-atomic="true"
     aria-relevant="additions text"
+    aria-labelledby="assistant-heading"
   >
-    <h2>Assistant Suggestions</h2>
+    <h2 id="assistant-heading">Assistant Suggestions</h2>
     <div id="assistant-text"
       dangerouslySetInnerHTML={{ __html: config.assistantResponse }}
     >

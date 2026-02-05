@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <Goals config={config}></Goals>
-      <div className="divider"></div>
+      <div className="divider"></div >
       <div className="stack">
         <Actions config={config}></Actions>
         <Assistant config={config}></Assistant>

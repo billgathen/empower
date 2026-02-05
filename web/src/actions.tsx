@@ -8,8 +8,8 @@ export default function Actions({ config }) {
     config.addAction(config.selectedGoalIndex, name);
   }
 
-  return <section id="actions">
-    <h2>{selectedGoal.label} Actions</h2>
+  return <section id="actions" aria-labelledby="actions-heading">
+    <h2 id="actions-heading">Actions</h2>
     <NewAction addNewAction={addNewAction}></NewAction>
     <form id="actions-list">
       {selectedGoal.actions.map((action: Action, idx: number) => <Action idx={idx} config={config} action={action}></Action>)}
@@ -45,5 +45,11 @@ function Action({ idx, config, action }) {
   const change = (value: string) => {
     config.updateAction(config.selectedGoalIndex, idx, { label: value });
   }
-  return <input type="text" value={action.label} onChange={(e) => change(e.target.value)} />
+  const id = `action-${idx}`
+  return <div>
+    <label htmlFor={id} className="action-label">
+      {idx + 1}.
+    </label>
+    <input id={id} type="text" value={action.label} onChange={(e) => change(e.target.value)} />
+  </div>
 }

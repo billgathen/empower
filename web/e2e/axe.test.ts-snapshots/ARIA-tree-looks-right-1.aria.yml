@@ -1,0 +1,11 @@
+- region "Goals":
+  - heading "Goals" [level=2]
+  - text: New Goal
+  - textbox "New Goal"
+  - button "Add Goal"
+  - radio "Research" [checked]
+  - text: Research
+  - radio "Plan"
+  - text: ""
+  - radio "Implement"
+  - text: Implement
