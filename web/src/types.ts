@@ -13,6 +13,11 @@ export type AssistantRequest = {
   requestText: string
 }
 
+export const EmptyAssistantRequest: AssistantRequest = {
+  type: "",
+  requestText: ""
+}
+
 export type AssistantResponse = string;
 
 export type ConfigAction =

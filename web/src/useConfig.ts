@@ -1,8 +1,9 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { defaultGoals } from "./data";
 import { configReducer } from "./reducers";
 import { AssistantResponse } from "./types";
 
+const STORAGE_KEY = "empower-config";
 const initialState = {
   goals: defaultGoals,
   selectedGoalIndex: 0,
@@ -11,7 +12,11 @@ const initialState = {
 }
 
 export function useConfig() {
-  const [state, dispatch] = useReducer(configReducer, initialState);
+  const [state, dispatch] = useReducer(configReducer, undefined, loadInitialState);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }, [state]);
 
   return {
     goals: state.goals,
@@ -27,5 +32,22 @@ export function useConfig() {
       updates: { label?: string; details?: string }
     ) => dispatch({ type: "update-action", goalIndex, actionIndex, ...updates }),
     setAssistantResponse: (assistantResponse: AssistantResponse) => dispatch({ type: "set-assistant-response", assistantResponse }),
+  }
+}
+
+function loadInitialState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return initialState;
+
+    const parsed = JSON.parse(raw);
+
+    return {
+      ...initialState,
+      ...parsed
+    };
+  } catch {
+    console.error("Error loading initialState from localStorage");
+    return initialState;
   }
 }

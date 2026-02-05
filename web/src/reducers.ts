@@ -1,4 +1,4 @@
-import { ConfigState, ConfigAction, Goal } from "./types"
+import { ConfigState, ConfigAction, Goal, EmptyAssistantRequest } from "./types"
 
 export function configReducer(
   state: ConfigState,
@@ -60,6 +60,7 @@ export function configReducer(
     case "set-assistant-response":
       return {
         ...state,
+        assistantRequest: EmptyAssistantRequest,
         assistantResponse: action.assistantResponse
       };
 
