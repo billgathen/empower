@@ -1,0 +1,3 @@
+- region "Assistant Suggestions":
+  - heading "Assistant Suggestions" [level=2]
+  - text: This is the assistant's response

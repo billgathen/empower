@@ -61,6 +61,10 @@ section {
   margin-block: 1rem;
 }
 
+#assistant:has(#assistant-text:empty) {
+  display: none;
+}
+
 #app {
   height: 100%;
   background-color: var(--workspace);
