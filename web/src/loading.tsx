@@ -4,7 +4,7 @@ export default function Loading({ config }) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    setVisible(config.assistantRequest.type !== "")
+    setVisible(config.assistantIsAuthorized && config.assistantRequest.type !== "")
   }, [config.assistantRequest])
 
   return <div>

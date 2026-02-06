@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { defaultGoals } from "./data";
 import { configReducer } from "./reducers";
 import { AssistantResponse } from "./types";
@@ -11,8 +11,12 @@ const initialState = {
   assistantResponse: ""
 }
 
+type Authorized = boolean | null;
+
 export function useConfig() {
   const [state, dispatch] = useReducer(configReducer, undefined, loadInitialState);
+  /* let this reset on page refresh */
+  const [assistantIsAuthorized, setAssistantIsAuthorized] = useState<Authorized>(null);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -21,6 +25,7 @@ export function useConfig() {
   return {
     goals: state.goals,
     selectedGoalIndex: state.selectedGoalIndex,
+    assistantIsAuthorized: assistantIsAuthorized,
     assistantRequest: state.assistantRequest,
     assistantResponse: state.assistantResponse,
     selectGoal: (index: number) => dispatch({ type: "select-goal", index }),
@@ -31,6 +36,7 @@ export function useConfig() {
       actionIndex: number,
       updates: { label?: string; details?: string }
     ) => dispatch({ type: "update-action", goalIndex, actionIndex, ...updates }),
+    setAssistantIsAuthorized: (assistantIsAuthorized: boolean) => setAssistantIsAuthorized(assistantIsAuthorized),
     setAssistantResponse: (assistantResponse: AssistantResponse) => dispatch({ type: "set-assistant-response", assistantResponse }),
   }
 }

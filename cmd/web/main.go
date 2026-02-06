@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/billgathen/empower/internal/api"
+	"github.com/billgathen/empower/internal/assistant"
 	"github.com/billgathen/empower/internal/middleware"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -31,6 +32,7 @@ func main() {
 	r.Use(middleware.Recover)
 	r.Use(middleware.Logger)
 
+	r.HandleFunc("/api/assistant/authorized", assistantAuthorized).Methods("GET")
 	r.HandleFunc("/api/suggest", api.Suggest).Methods("POST")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(staticDir))))
@@ -49,6 +51,16 @@ func main() {
 	log.Printf("listening on %s", addr)
 	if err := http.ListenAndServe(addr, r); err != nil {
 		log.Fatal(err)
+	}
+}
+
+func assistantAuthorized(w http.ResponseWriter, _ *http.Request) {
+	if assistant.IsAuthorized() {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	} else {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Unauthorized"))
 	}
 }
 

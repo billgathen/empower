@@ -17,7 +17,7 @@ export function configReducer(
       return {
         ...state,
         selectedGoalIndex: action.index,
-        assistantResponse: "",
+        assistantResponse: { status: 0, message: "" },
       };
 
     case "add-action":

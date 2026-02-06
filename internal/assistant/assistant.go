@@ -15,6 +15,11 @@ import (
 	"github.com/yuin/goldmark/parser"
 )
 
+func IsAuthorized() bool {
+	_, exists := os.LookupEnv("OPENAI_API_KEY")
+	return exists
+}
+
 func Call(ctx context.Context, prompt string) (string, error) {
 	apiKey, exists := os.LookupEnv("OPENAI_API_KEY")
 	if !exists {

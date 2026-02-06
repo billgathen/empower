@@ -49,8 +49,8 @@ func Suggest(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Println(err)
-		if errors.Is(err, context.Canceled) {
-			writeJSON(w, 401, types.ErrorResponse{Error: "request canceled"})
+		if strings.Contains(err.Error(), "OPENAI_API_KEY") {
+			writeJSON(w, 401, types.ErrorResponse{Error: "unauthorized"})
 			return
 		}
 		if errors.Is(err, context.Canceled) {

@@ -18,12 +18,16 @@ export const EmptyAssistantRequest: AssistantRequest = {
   requestText: ""
 }
 
-export type AssistantResponse = string;
+export type AssistantResponse = {
+  status: number
+  message: string
+}
 
 export type ConfigAction =
   | { type: "select-goal"; index: number }
   | { type: "add-goal"; label: string }
   | { type: "add-action"; goalIndex: number; label: string }
+  | { type: "set-assistant-is-authorized"; assistantIsAuthorized: boolean | null }
   | { type: "set-assistant-response"; assistantResponse: AssistantResponse }
   | {
     type: "update-action";
@@ -36,6 +40,7 @@ export type ConfigAction =
 export type ConfigState = {
   goals: Goal[],
   selectedGoalIndex: number,
+  assistantIsAuthorized: boolean | null,
   assistantRequest: AssistantRequest,
   assistantResponse: AssistantResponse,
 }
