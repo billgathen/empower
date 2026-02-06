@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { injectAxe, checkA11y } from "axe-playwright";
-import mockAssistant from "./mock-assistant";
+import { mockAssistant } from "./mock-assistant";
 
 const goalText = "lose weight";
 const labelName = "New Goal";
@@ -8,6 +8,7 @@ const buttonName = "Add";
 const assistantResponse = "This is the assistant's response";
 
 test("page has no obvious a11y violations", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
   await page.goto("/");
 
   // Inject axe into the page
@@ -21,6 +22,7 @@ test("page has no obvious a11y violations", async ({ page }) => {
 });
 
 test("Goals ARIA tree looks right", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Goals" })).toBeVisible();
 
@@ -29,6 +31,7 @@ test("Goals ARIA tree looks right", async ({ page }) => {
 })
 
 test("Actions ARIA tree looks right", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Actions" })).toBeVisible();
 
@@ -50,6 +53,7 @@ test("Assistant ARIA tree looks right", async ({ page }) => {
 });
 
 test("no unnamed buttons/inputs", async ({ page }) => {
+  mockAssistant(page, assistantResponse);
   await page.goto("/");
 
   // Buttons should have an accessible name

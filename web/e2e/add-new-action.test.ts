@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { mockAssistant } from "./mock-assistant";
 
 const goalLabelName = "New Goal";
 const goalText = "lose weight";
@@ -7,6 +8,7 @@ const actionText = "exercise more";
 const buttonName = "Add";
 
 test("with pointing device", async ({ page }) => {
+  mockAssistant(page, "shouldn't be needed");
   await page.goto("/");
 
   const goals = page.locator('section#goals');

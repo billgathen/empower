@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import mockAssistant from "./mock-assistant";
+import { mockAssistant } from "./mock-assistant";
 
 const goalText = "lose weight";
 const labelName = "New Goal";
