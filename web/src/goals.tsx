@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Goal } from "./types";
+import { flushSync } from "react-dom";
 
 export default function Goals({ config }) {
+  const [statusContent, setStatusContent] = useState("");
 
   const addNewGoal = (name: string) => {
     config.addGoal(name);
@@ -16,6 +18,12 @@ export default function Goals({ config }) {
   const deleteGoal = () => {
     if (window.confirm(`Delete goal '${selectedGoalLabel(config)}'?`)) {
       config.deleteGoal()
+
+      flushSync(() => setStatusContent(""))
+
+      setTimeout(() => {
+        setStatusContent("Goal deleted")
+      }, 150)
     }
   }
 
@@ -47,7 +55,7 @@ export default function Goals({ config }) {
       <button type="button" id="delete-selected-goal" aria-label={`Delete ${selectedGoalLabel(config)}`} onClick={deleteGoal}>Delete</button>
     </div>
 
-    <div aria-live="polite" aria-atomic="true" className="sr-only" id="goals-status"></div>
+    <div role="status" aria-live="polite" aria-atomic="true" className="sr-only" id="goals-status">{statusContent}</div>
   </section >;
 }
 
