@@ -26,7 +26,7 @@ export default function Assistant({ config }) {
           >
           </div>
         </> :
-        <div className="sr-only">Asking assistant for suggestions...</div>
+        ""
       }
     </section>
   } else {

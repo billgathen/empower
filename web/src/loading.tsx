@@ -30,5 +30,8 @@ export default function Loading({ config }) {
         />
       </path>
     </svg>
+    <div aria-live="polite" aria-atomic="true" className="sr-only">
+      {visible ? "Asking assistant for suggestions" : ""}
+    </div>
   </div>
 }
