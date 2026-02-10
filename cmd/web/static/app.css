@@ -131,6 +131,12 @@ section#actions,
   flex-direction: column;
 }
 
+#goals-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
 .add-item {
   display: grid;
   grid-template-columns: 1fr max-content;

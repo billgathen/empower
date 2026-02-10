@@ -28,8 +28,12 @@ test("with keyboard + screen reader", async ({ page }) => {
   await page.keyboard.press("Tab");
 
 
-  // navigate to actions
+  // navigate to controls
   await page.keyboard.press("Tab");
+  await expect(goals.locator("#jump-to-actions")).toBeFocused();
+
+  // navigate to actions
+  await page.keyboard.press("Space");
 
   const actionInput = actions.getByLabel(actionLabelName);
   await expect(actionInput).toBeVisible();

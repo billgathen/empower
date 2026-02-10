@@ -11,7 +11,7 @@ export default function Actions({ config }) {
   return <section id="actions" aria-labelledby="actions-heading">
     <h2 id="actions-heading">Actions</h2>
     <NewAction addNewAction={addNewAction}></NewAction>
-    <form id="actions-list">
+    <form id="actions-list" aria-labelledby="actions-headings">
       {selectedGoal.actions.map((action: Action, idx: number) => <Action idx={idx} config={config} action={action}></Action>)}
     </form>
   </section>;

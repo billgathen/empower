@@ -3,9 +3,10 @@
   - text: New Action
   - textbox "New Action"
   - button "Add Action"
-  - text: ""
-  - textbox "1.": Ask someone
-  - text: ""
-  - textbox "2.": Ask someone else
-  - text: ""
-  - textbox "3.": Ask the machines
+  - form:
+    - text: "1."
+    - textbox "1.": Ask someone
+    - text: "2."
+    - textbox "2.": Ask someone else
+    - text: "3."
+    - textbox "3.": Ask the machines
