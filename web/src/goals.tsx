@@ -30,21 +30,25 @@ export default function Goals({ config }) {
   return <section id="goals" aria-labelledby="goals-heading">
     <h2 id="goals-heading">Goals</h2>
     <NewGoal addNewGoal={addNewGoal}></NewGoal>
-    <div id="goals-list">
-      <div id="goals-help" className="sr-only">
+    <fieldset id="goals-list">
+      <legend className="sr-only">Goals</legend>
+
+      <div id="goals-help" tabIndex={0}>
         Use arrow keys to move through goals. Press Tab to reach View Actions, Edit, and Delete
       </div>
 
-      {config.goals.map((goal: Goal, idx: number) => {
-        return <Goal
-          goal={goal}
-          idx={idx}
-          key={idx}
-          selectedGoalIndex={config.selectedGoalIndex}
-          selectGoal={config.selectGoal}
-        ></Goal>
-      })}
-    </div>
+      <div className="stack" role="radiogroup" aria-labelledby="goals-heading">
+        {config.goals.map((goal: Goal, idx: number) => {
+          return <Goal
+            goal={goal}
+            idx={idx}
+            key={idx}
+            selectedGoalIndex={config.selectedGoalIndex}
+            selectGoal={config.selectGoal}
+          ></Goal>
+        })}
+      </div>
+    </fieldset>
 
     <div id="goals-controls" role="group" aria-label="Actions for selected goal">
       <button type="button" id="jump-to-actions" aria-describedby="jump-help" aria-label={`Jump to actions for ${selectedGoalLabel(config)}`} onClick={jumpToActions}>Actions</button>

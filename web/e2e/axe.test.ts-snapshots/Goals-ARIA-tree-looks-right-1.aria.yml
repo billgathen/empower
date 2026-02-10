@@ -3,9 +3,18 @@
   - text: New Goal
   - textbox "New Goal"
   - button "Add Goal"
-  - radio "Research" [checked]
-  - text: Research
-  - radio "Plan"
-  - text: ""
-  - radio "Implement"
-  - text: Implement
+  - group "Goals":
+    - text: Goals Use arrow keys to move through goals. Press Tab to reach View Actions, Edit, and Delete
+    - radiogroup "Goals":
+      - radio "Research" [checked]
+      - text: Research
+      - radio "Plan"
+      - text: ""
+      - radio "Implement"
+      - text: Implement
+  - group "Actions for selected goal":
+    - button "Jump to actions for Research"
+    - text: Moves focus to the action input for this goal
+    - button "Edit Research"
+    - button "Delete Research"
+  - status

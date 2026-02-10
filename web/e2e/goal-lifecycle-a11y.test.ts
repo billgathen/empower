@@ -9,7 +9,6 @@ const assistantResponse = "This is the assistant's response";
 
 test("with keyboard + screen reader", async ({ page }) => {
   mockAssistant(page, assistantResponse);
-
   await page.goto("/");
 
   const assistant = page.locator('section#assistant')
@@ -39,6 +38,7 @@ test("with keyboard + screen reader", async ({ page }) => {
   const items = page.locator("#goals-list");
   const radioWithLabel = items.getByRole("radio", { name: goalText });
 
+  await page.keyboard.press("Tab"); // display nav instructions
   await page.keyboard.press("Tab");
 
   await expect(radioWithLabel).toBeVisible();

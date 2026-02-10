@@ -25,6 +25,7 @@ test("with keyboard + screen reader", async ({ page }) => {
   await page.keyboard.press("Enter");
 
   // select goal
+  await page.keyboard.press("Tab"); // display nav instructions
   await page.keyboard.press("Tab");
 
 

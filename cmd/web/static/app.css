@@ -116,6 +116,17 @@ section {
   border: 0;
 }
 
+.only-focused {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  &:focus {
+    height: auto;
+  }
+}
+
 section#goals,
 #goals-list,
 section#actions,
@@ -125,10 +136,27 @@ section#actions,
   flex-direction: column;
 }
 
+#goals-list {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .goals {
   display: flex;
   gap: 1rem;
   flex-direction: column;
+}
+
+#goals-help {
+  height: 0;
+  overflow: hidden;
+  margin-block-start: -1rem; /* remove the extra gap */
+
+  &:focus {
+    height: auto;
+    margin-block-start: auto;
+  }
 }
 
 #goals-controls {
