@@ -3,7 +3,8 @@ import { mockAssistant } from "./mock-assistant";
 
 const goalText = "lose weight";
 const labelName = "New Goal";
-const buttonName = "Add";
+const addButtonName = "Add";
+const deleteButtonName = "Delete";
 const assistantResponse = "This is the assistant's response";
 
 test("with keyboard + screen reader", async ({ page }) => {
@@ -29,7 +30,7 @@ test("with keyboard + screen reader", async ({ page }) => {
   // submit
   await page.keyboard.press("Tab");
 
-  const addButton = goals.getByRole("button", { name: buttonName });
+  const addButton = goals.getByRole("button", { name: addButtonName });
   await expect(addButton).toBeFocused();
 
   await page.keyboard.press("Enter");
@@ -49,4 +50,21 @@ test("with keyboard + screen reader", async ({ page }) => {
 
   // confirm response returned from assistant
   await expect(assistantText).toContainText(assistantResponse)
+
+  // handle delete confirmation
+  page.on("dialog", async dialog => {
+    expect(dialog.type()).toBe("confirm");
+    expect(dialog.message()).toContain(`Delete goal '${goalText}'?`);
+    await dialog.accept();
+  });
+
+  // delete goal
+  const deleteButton = goals.getByRole('button', { name: deleteButtonName })
+  await page.keyboard.press("Tab") // Actions
+  await page.keyboard.press("Tab") // Edit
+  await page.keyboard.press("Tab")
+  expect(deleteButton).toBeFocused()
+  await page.keyboard.press("Enter")
+
+  await expect(radioWithLabel).not.toBeVisible()
 });

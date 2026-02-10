@@ -13,6 +13,12 @@ export default function Goals({ config }) {
     el?.focus();
   };
 
+  const deleteGoal = () => {
+    if (window.confirm(`Delete goal '${selectedGoalLabel(config)}'?`)) {
+      config.deleteGoal()
+    }
+  }
+
   return <section id="goals" aria-labelledby="goals-heading">
     <h2 id="goals-heading">Goals</h2>
     <NewGoal addNewGoal={addNewGoal}></NewGoal>
@@ -38,7 +44,7 @@ export default function Goals({ config }) {
         Moves focus to the action input for this goal
       </span>
       <button type="button" id="edit-selected-goal" aria-label={`Edit ${selectedGoalLabel(config)}`}>Edit</button>
-      <button type="button" id="delete-selected-goal" aria-label={`Delete ${selectedGoalLabel(config)}`}>Delete</button>
+      <button type="button" id="delete-selected-goal" aria-label={`Delete ${selectedGoalLabel(config)}`} onClick={deleteGoal}>Delete</button>
     </div>
 
     <div aria-live="polite" aria-atomic="true" className="sr-only" id="goals-status"></div>
@@ -46,7 +52,7 @@ export default function Goals({ config }) {
 }
 
 function selectedGoalLabel(config) {
-  return config.goals[config.selectedGoalIndex].label
+  return config.goals[config.selectedGoalIndex]?.label || ""
 }
 
 function NewGoal({ addNewGoal }) {

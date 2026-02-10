@@ -20,6 +20,17 @@ export function configReducer(
         assistantResponse: { status: 0, message: "" },
       };
 
+    case "delete-goal":
+      const idx = state.selectedGoalIndex
+      const remainingGoals = state.goals.filter((_, i) => i !== idx)
+      const newIdx = idx > remainingGoals.length - 1 ? idx - 1 : idx
+      return {
+        ...state,
+        goals: remainingGoals,
+        selectedGoalIndex: newIdx,
+        assistantResponse: { status: 0, message: "" },
+      };
+
     case "add-action":
       return {
         ...state,

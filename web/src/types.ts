@@ -24,6 +24,7 @@ export type AssistantResponse = {
 }
 
 export type ConfigAction =
+  | { type: "delete-goal" }
   | { type: "select-goal"; index: number }
   | { type: "add-goal"; label: string }
   | { type: "add-action"; goalIndex: number; label: string }
