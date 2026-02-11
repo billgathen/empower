@@ -25,21 +25,19 @@ test("with keyboard + screen reader", async ({ page }) => {
   await page.keyboard.press("Enter");
 
   // select goal
-  await page.keyboard.press("Tab"); // display nav instructions
+  await page.keyboard.press("Tab"); // nav instructions
   await page.keyboard.press("Tab");
-
-
-  // navigate to controls
-  await page.keyboard.press("Tab");
-  await expect(goals.locator("#jump-to-actions")).toBeFocused();
+  expect(goals.getByLabel(goalText)).toBeFocused();
 
   // navigate to actions
-  await page.keyboard.press("Space");
+  await page.keyboard.press("Tab"); // goal input
+  await page.keyboard.press("Tab"); // delete goal button
+  await page.keyboard.press("Tab");
 
   const actionInput = actions.getByLabel(actionLabelName);
   await expect(actionInput).toBeVisible();
-  await expect(actionInput).toBeFocused();
   await expect(actionInput).toHaveAccessibleName(actionLabelName);
+  await expect(actionInput).toBeFocused();
 
   // fill out action
   await page.keyboard.type(actionText);

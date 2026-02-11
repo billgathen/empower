@@ -29,6 +29,7 @@ export function useConfig() {
     assistantRequest: state.assistantRequest,
     assistantResponse: state.assistantResponse,
     selectGoal: (index: number) => dispatch({ type: "select-goal", index }),
+    updateGoal: (index: number, label: string) => dispatch({ type: "update-goal", index, label }),
     addGoal: (label: string) => dispatch({ type: "add-goal", label }),
     deleteGoal: () => dispatch({ type: "delete-goal" }),
     addAction: (goalIndex: number, label: string) => dispatch({ type: "add-action", goalIndex, label }),

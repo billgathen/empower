@@ -14,6 +14,7 @@ test("with pointing device", async ({ page }) => {
 
   // check list
   const items = goals.locator('#goals-list')
+  const goal = page.locator('section#goal')
 
   const radioWithLabel = items.getByRole('radio', { name: goalText })
 
@@ -34,7 +35,7 @@ test("with pointing device", async ({ page }) => {
   });
 
   // delete goal
-  await goals.getByRole('button', { name: deleteButtonName }).click()
+  await goal.getByRole('button', { name: deleteButtonName }).click()
 
   await expect(radioWithLabel).not.toBeVisible()
 })

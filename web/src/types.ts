@@ -26,6 +26,7 @@ export type AssistantResponse = {
 export type ConfigAction =
   | { type: "delete-goal" }
   | { type: "select-goal"; index: number }
+  | { type: "update-goal"; index: number; label: string }
   | { type: "add-goal"; label: string }
   | { type: "add-action"; goalIndex: number; label: string }
   | { type: "set-assistant-is-authorized"; assistantIsAuthorized: boolean | null }

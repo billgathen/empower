@@ -1,30 +1,10 @@
 import { useState } from "react";
 import { Goal } from "./types";
-import { flushSync } from "react-dom";
 
 export default function Goals({ config }) {
-  const [statusContent, setStatusContent] = useState("");
-
   const addNewGoal = (name: string) => {
     config.addGoal(name);
     config.selectGoal(0);
-  }
-
-  const jumpToActions = () => {
-    const el = document.getElementById("add-action-input") as HTMLInputElement | null;
-    el?.focus();
-  };
-
-  const deleteGoal = () => {
-    if (window.confirm(`Delete goal '${selectedGoalLabel(config)}'?`)) {
-      config.deleteGoal()
-
-      flushSync(() => setStatusContent(""))
-
-      setTimeout(() => {
-        setStatusContent("Goal deleted")
-      }, 150)
-    }
   }
 
   return <section id="goals" aria-labelledby="goals-heading">
@@ -34,37 +14,23 @@ export default function Goals({ config }) {
       <legend className="sr-only">Goals</legend>
 
       <div id="goals-help" tabIndex={0}>
-        Use arrow keys to move through goals. Press Tab to reach View Actions, Edit, and Delete
+        Use arrow keys to move through goals. Press Tab to work with a specific goal.
       </div>
 
       <div className="stack" role="radiogroup" aria-labelledby="goals-heading">
         {config.goals.map((goal: Goal, idx: number) => {
-          return <Goal
+          return <GoalsItem
             goal={goal}
             idx={idx}
             key={idx}
             selectedGoalIndex={config.selectedGoalIndex}
             selectGoal={config.selectGoal}
-          ></Goal>
+          ></GoalsItem>
         })}
       </div>
     </fieldset>
 
-    <div id="goals-controls" role="group" aria-label="Actions for selected goal">
-      <button type="button" id="jump-to-actions" aria-describedby="jump-help" aria-label={`Jump to actions for ${selectedGoalLabel(config)}`} onClick={jumpToActions}>Actions</button>
-      <span id="jump-help" className="sr-only">
-        Moves focus to the action input for this goal
-      </span>
-      <button type="button" id="edit-selected-goal" aria-label={`Edit ${selectedGoalLabel(config)}`}>Edit</button>
-      <button type="button" id="delete-selected-goal" aria-label={`Delete ${selectedGoalLabel(config)}`} onClick={deleteGoal}>Delete</button>
-    </div>
-
-    <div role="status" aria-live="polite" aria-atomic="true" className="sr-only" id="goals-status">{statusContent}</div>
   </section >;
-}
-
-function selectedGoalLabel(config) {
-  return config.goals[config.selectedGoalIndex]?.label || ""
 }
 
 function NewGoal({ addNewGoal }) {
@@ -91,7 +57,7 @@ function NewGoal({ addNewGoal }) {
   </div >
 }
 
-function Goal({ goal, idx, selectedGoalIndex, selectGoal }) {
+function GoalsItem({ goal, idx, selectedGoalIndex, selectGoal }) {
   const isSelected = idx === selectedGoalIndex
   const change = () => {
     if (!isSelected) {

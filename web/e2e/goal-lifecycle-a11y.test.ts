@@ -18,6 +18,7 @@ test("with keyboard + screen reader", async ({ page }) => {
   await expect(assistantText).toBeEmpty()
 
   const goals = page.locator('section#goals');
+  const goal = page.locator('section#goal');
 
   // fill out goal, ignoring tabbable elements above
   const input = goals.getByLabel(labelName);
@@ -59,10 +60,9 @@ test("with keyboard + screen reader", async ({ page }) => {
   });
 
   // delete goal
-  const deleteButton = goals.getByRole('button', { name: deleteButtonName })
-  await page.keyboard.press("Tab") // Actions
-  await page.keyboard.press("Tab") // Edit
+  await page.keyboard.press("Tab") // goal input
   await page.keyboard.press("Tab")
+  const deleteButton = goal.getByRole('button', { name: deleteButtonName })
   expect(deleteButton).toBeFocused()
   await page.keyboard.press("Enter")
 

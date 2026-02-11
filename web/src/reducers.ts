@@ -13,6 +13,12 @@ export function configReducer(
         assistantRequest: { type: 'goal', requestText: newGoal.label }
       };
 
+    case "update-goal":
+      state.goals[action.index].label = action.label;
+      return {
+        ...state,
+      };
+
     case "select-goal":
       return {
         ...state,
