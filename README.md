@@ -1,9 +1,13 @@
 # Empower [![CI](https://github.com/billgathen/empower/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/billgathen/empower/actions/workflows/ci.yml)
 
-Go + React app that helps you accomplish your goals by:
-1. Organizing them and keeping your highest priorities in sight
-1. Brainstorming steps you can take to reach them
-1. Tracking your progress toward success
+Go + React app that uses OpenAI integration to help you accomplish your goals by:
+1. Phrasing them in a specific, time-boxed, actionable way.
+1. Suggesting steps you can take to reach them.
+1. Identifying what success looks like to you, so you will know when you're done and ready to challenge yourself again!
+
+Remember, the AI is **your** assistant and you are free to use or disregard its suggestions based on your better understanding and self-knowledge.
+
+Try it out by following the steps below!
 
 ## To run locally
 
