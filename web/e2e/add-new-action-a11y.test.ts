@@ -32,6 +32,7 @@ test("with keyboard + screen reader", async ({ page }) => {
   // navigate to actions
   await page.keyboard.press("Tab"); // goal input
   await page.keyboard.press("Tab"); // delete goal button
+  await page.keyboard.press("Tab"); // success criteria
   await page.keyboard.press("Tab");
 
   const actionInput = actions.getByLabel(actionLabelName);

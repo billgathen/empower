@@ -37,7 +37,10 @@ func Suggest(w http.ResponseWriter, r *http.Request) {
 
 		prompt := "You are an expert life coach specializing in goals that get results. " +
 			"Suggest improvements to this goal if it is not specific, time-boxed, and actionable. " +
-			"Include examples if possible. " +
+			"Your response should be in this format:\n" +
+			"Goal: <a short, simple goal that's easy to say>\n" +
+			"Actions: 3-7 actions that will help accomplish that goal\n" +
+			"Success Criteria: a specific, timeboxed, observable criteria\n" +
 			"Keep your response under 200 words. " +
 			"The goal is: " + req.UserInput
 

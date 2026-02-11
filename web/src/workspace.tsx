@@ -1,6 +1,6 @@
+import Goal from "./goal";
 import Actions from "./actions";
 import Assistant from "./assistant";
-import Goal from "./goal";
 import Loading from "./loading";
 
 export default function Workspace({ config }) {

@@ -30,6 +30,7 @@ export function useConfig() {
     assistantResponse: state.assistantResponse,
     selectGoal: (index: number) => dispatch({ type: "select-goal", index }),
     updateGoal: (index: number, label: string) => dispatch({ type: "update-goal", index, label }),
+    updateSuccessCriteria: (index: number, label: string) => dispatch({ type: "update-success-criteria", index, label }),
     addGoal: (label: string) => dispatch({ type: "add-goal", label }),
     deleteGoal: () => dispatch({ type: "delete-goal" }),
     addAction: (goalIndex: number, label: string) => dispatch({ type: "add-action", goalIndex, label }),

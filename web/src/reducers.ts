@@ -6,7 +6,7 @@ export function configReducer(
 ): ConfigState {
   switch (action.type) {
     case "add-goal":
-      const newGoal = { label: action.label, actions: [] } as Goal;
+      const newGoal = { label: action.label, actions: [], successCriteria: "" } as Goal;
       return {
         ...state,
         goals: [newGoal, ...state.goals],
@@ -15,6 +15,12 @@ export function configReducer(
 
     case "update-goal":
       state.goals[action.index].label = action.label;
+      return {
+        ...state,
+      };
+
+    case "update-success-criteria":
+      state.goals[action.index].successCriteria = action.label;
       return {
         ...state,
       };
