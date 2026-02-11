@@ -7,6 +7,9 @@ Go + React app that uses OpenAI integration to help you accomplish your goals by
 
 Remember, the AI is **your** assistant and you are free to use or disregard its suggestions based on your better understanding and self-knowledge.
 
+Empower was built with accessibility and mobile as first-class concepts.
+It can be saved to your mobile device and used normally as long as the server is running and on the same wifi network.
+
 Try it out by following the steps below!
 
 ## To run locally
